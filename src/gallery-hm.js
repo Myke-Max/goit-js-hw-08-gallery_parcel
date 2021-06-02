@@ -1,6 +1,5 @@
 import galleryItems from "./gallery-items.js"
-
-const refs = {
+ const refs = {
   gallery: document.querySelector('.js-gallery'),
   galleryItems: document.querySelector('.gallery__item'),
   galleryLink: document.querySelector('.gallery__link'),
@@ -11,7 +10,7 @@ const refs = {
   modalCloseBtn : document.querySelector('.lightbox__button'),
 }
 
-const galleryList = galleryItems.map(({preview,original,desciption}) => {
+ const galleryList = galleryItems.map(({preview,original,desciption}) => {
   return `<li class="gallery__item">
   <a class= "gallery__link"  href=${original}>
     <img
@@ -25,9 +24,7 @@ const galleryList = galleryItems.map(({preview,original,desciption}) => {
 }
 ).join(' ')
   
-refs.gallery.insertAdjacentHTML('afterBegin', galleryList)
-
-const onImgClick = e => {
+ const onImgClick = e => {
   if (e.target.nodeName !== 'IMG') {
     return
   }
@@ -40,29 +37,29 @@ const onImgClick = e => {
   window.addEventListener('keydown',onArrowClick)
 }
 
-const onCloseModal =  () => {
+ const onCloseModal =  () => {
   refs.openModal.classList.remove('is-open')
   refs.modalImg.src = ""
 }
 
-const onEscClose =  e => {
+ const onEscClose =  e => {
   if (e.code === "Escape") {
   onCloseModal()
 }
 }
 
-const onBackDropClose =  e => {
+ const onBackDropClose =  e => {
   if (e.currentTarget === e.target) {
     onCloseModal()
   }
 }
 
-const onArrowClick = e => {
+  const onArrowClick = e => {
   if (e.code !== 'ArrowLeft' && e.code !== 'ArrowRight') {
     return
   }
 
-  const currentImg = galleryItems.find(img => img.original === refs.modalImg.src)
+   const currentImg = galleryItems.find(img => img.original === refs.modalImg.src)
   
   let currentIndex =
     e.code === 'ArrowLeft'
@@ -79,10 +76,10 @@ const onArrowClick = e => {
   refs.modalImg.alt = galleryItems[currentIndex].description
 }
 
+export const insertEl = () =>  refs.gallery.insertAdjacentHTML('afterBegin', galleryList)
 
+export const onlistenerClick = () => refs.gallery.addEventListener('click', onImgClick)
 
-
-refs.gallery.addEventListener('click', onImgClick)
 
 
 
